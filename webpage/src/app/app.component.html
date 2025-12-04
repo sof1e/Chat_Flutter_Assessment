@@ -1,0 +1,15 @@
+<div class="flex">
+  <!-- Sidebar -->
+  <div class="w-48 bg-gray-100 h-screen p-4">
+    <nav class="flex flex-col space-y-4">
+      <a routerLink="/tickets" class="text-blue-600">Tickets</a>
+      <a routerLink="/knowledge" class="text-blue-600">Knowledge Base</a>
+      <a routerLink="/logs" class="text-blue-600">Live Logs</a>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <div class="flex-1 p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

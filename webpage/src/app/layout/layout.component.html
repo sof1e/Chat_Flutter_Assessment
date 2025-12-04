@@ -1,0 +1,36 @@
+<div class="min-h-screen flex relative">
+
+  <!-- Desktop Sidebar -->
+  <app-sidebar class="hidden md:block"></app-sidebar>
+
+  <!-- Mobile slide-out Sidebar -->
+  <div 
+    class="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white transform transition-transform duration-300 z-50 md:hidden"
+    [class.translate-x-0]="isMobileOpen"
+    [class.-translate-x-full]="!isMobileOpen"
+  >
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 md:ml-64">
+    <!-- Top bar for mobile -->
+    <div class="md:hidden flex items-center justify-between p-3 mx-4 my-2 bg-white rounded-lg shadow">
+      <div class="text-lg font-semibold">Internal Tools</div>
+      <button (click)="toggleMobile()">☰</button>
+    </div>
+
+    <main class="p-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- Overlay when the mobile sidebar is open -->
+  <div 
+    class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+    *ngIf="isMobileOpen"
+    (click)="toggleMobile()"
+  ></div>
+
+</div>
+

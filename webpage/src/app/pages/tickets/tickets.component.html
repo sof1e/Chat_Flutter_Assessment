@@ -1,0 +1,62 @@
+<div class="bg-white rounded shadow p-4">
+  <!-- Search & Filter Bar -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+    <div class="flex items-center gap-2">
+      <input type="text" [(ngModel)]="search" placeholder="Search ID or subject" class="border rounded p-2"/>
+      <select [(ngModel)]="filter" class="border rounded p-2">
+        <option value="All">All</option>
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Closed">Closed</option>
+      </select>
+    </div>
+    <div class="text-sm text-gray-500">Showing {{filtered.length}} tickets</div>
+  </div>
+
+  <!-- Loading Skeleton -->
+  <div *ngIf="loading" class="border rounded-md overflow-hidden">
+    <div class="grid grid-cols-4 border-b p-2 bg-gray-100">
+      <div class="h-4 bg-gray-300 rounded w-16"></div>
+      <div class="h-4 bg-gray-300 rounded w-32"></div>
+      <div class="h-4 bg-gray-300 rounded w-20"></div>
+      <div class="h-4 bg-gray-300 rounded w-24"></div>
+    </div>
+    <div *ngFor="let _ of [1,2,3]" class="grid grid-cols-4 border-b p-2 animate-pulse">
+      <div class="h-4 bg-gray-200 rounded w-16"></div>
+      <div class="h-4 bg-gray-200 rounded w-32"></div>
+      <div class="h-4 bg-gray-200 rounded w-20"></div>
+      <div class="h-4 bg-gray-200 rounded w-24"></div>
+    </div>
+  </div>
+
+  <!-- Real Table -->
+  <div *ngIf="!loading" class="border rounded-md overflow-hidden">
+    <table class="w-full text-left">
+      <thead class="bg-gray-100 text-sm text-gray-600">
+        <tr>
+          <th class="p-2">ID</th>
+          <th class="p-2">Subject</th>
+          <th class="p-2">Status</th>
+          <th class="p-2">Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of filtered" class="border-t hover:bg-slate-50">
+          <td class="p-2 font-mono text-sm">{{ t.id }}</td>
+          <td class="p-2">{{ t.subject }}</td>
+          <td class="p-2">
+            <span class="px-2 py-1 rounded text-xs font-medium"
+                  [ngClass]="{
+                    'bg-red-100 text-red-700': t.status === 'Open',
+                    'bg-yellow-100 text-yellow-700': t.status === 'In Progress',
+                    'bg-green-100 text-green-700': t.status === 'Closed'
+                  }">
+              {{ t.status }}
+            </span>
+          </td>
+          <td class="p-2 text-sm text-gray-500">{{ t.created | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

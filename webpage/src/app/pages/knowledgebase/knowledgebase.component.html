@@ -1,0 +1,18 @@
+<div class="bg-white p-4 rounded shadow">
+  <div class="flex gap-3 items-center">
+    <h2 class="text-lg font-semibold">Knowledgebase Editor</h2>
+    <button (click)="save()" class="ml-auto bg-gray-700 text-white px-3 py-1 rounded">Save</button>
+    <span *ngIf="saved" class="text-sm text-green-600">Saved ✓</span>
+  </div>
+
+  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <textarea [(ngModel)]="content" rows="10" class="border rounded p-2 w-full" placeholder="Write markdown here..."></textarea>
+    <div class="border rounded p-2 bg-slate-50">
+      <div class="prose max-w-none whitespace-pre-wrap">{{ content }}</div>
+    </div>
+  </div>
+    <div class="mt-6 p-4 border rounded bg-green-50">
+    <h3 class="font-semibold mb-2">Last Saved Content:</h3>
+    <pre class="whitespace-pre-wrap">{{ savedContent }}</pre>
+  </div>
+</div>
